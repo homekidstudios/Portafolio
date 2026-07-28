@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Mi - Portafolio</title>
+    <!-- Importamos la fuente estilo pixel / retro -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        /* --- ESTILOS GENERALES Y BASE --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #000;
+            color: #ffffff;
+            font-family: 'Press Start 2P', monospace;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- MENÚ DE NAVEGACIÓN --- */
+        .navbar-container {
+            position: relative;
+            z-index: 10;
+            margin-top: 30px;
+            padding: 8px 15px;
+            background: rgba(8, 8, 8, 0.85);
+            backdrop-filter: blur(8px);
+            border: 2px solid #1a1a1a;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+        }
+
+        .nav-btn {
+            background: #000000;
+            color: #ffffff;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 25px;
+            font-size: 0.7rem;
+            font-family: 'Press Start 2P', monospace;
+            font-weight: normal;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.9), 
+                        0px 0px 2px rgba(255, 255, 255, 0.15);
+            height: 42px;
+        }
+
+        .nav-btn:hover {
+            background: #0a0a0a;
+            transform: translateY(-1px);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 1), 
+                        0px 0px 4px rgba(255, 255, 255, 0.25);
+        }
+
+        .btn-icon-img {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+            display: block;
+            mix-blend-mode: screen;
+            filter: brightness(1.1);
+        }
+
+        .nav-logo {
+            width: 38px;
+            height: 38px;
+            background: #1a1a1a;
+            border-radius: 50%;
+            border: 1px solid #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            text-decoration: none;
+        }
+
+        .nav-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* --- SECCIÓN SOBRE MI --- */
+        .about-section {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 1000px;
+            margin-top: 40px;
+            padding: 20px 20px 60px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-decoration: underline;
+            text-underline-offset: 8px;
+            margin-bottom: 50px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Contenedor principal con texto a la izquierda e imagen de flores a la derecha */
+        .about-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            gap: 40px;
+            position: relative;
+        }
+
+        /* Bloque de texto estilo pixelado */
+        .about-text {
+            flex: 1;
+            max-width: 520px;
+            font-size: 0.85rem;
+            line-height: 2.2;
+            color: #ffffff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            text-align: justify;
+        }
+
+        /* Imagen decorativa (Rama de cerezo/flores en blanco y negro) */
+        .about-image-container {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .about-image {
+            max-width: 100%;
+            height: auto;
+            max-height: 380px;
+            object-fit: contain;
+            filter: grayscale(100%) contrast(125%);
+            pointer-events: none;
+        }
+
+        /* --- PIE DE PÁGINA (FOOTER) --- */
+        .footer-section {
+            position: relative;
+            z-index: 5;
+            width: 100%;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.8) 20%, #a0a0a0 100%);
+            margin-top: auto;
+            padding: 60px 40px 40px 40px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer-content {
+            width: 100%;
+            max-width: 1000px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            color: #000000f1;
+        }
+
+        .footer-info {
+            max-width: 550px;
+        }
+
+        .copyright-title {
+            font-size: 0.85rem;
+            color: #fff;
+            text-shadow: 2px 2px 0px #000;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-block {
+            margin-bottom: 20px;
+            font-size: 0.6rem;
+            line-height: 1.6;
+            color: #000000;
+            font-weight: bold;
+        }
+
+        .info-block a {
+            color: #000;
+            text-decoration: underline;
+        }
+
+        .profile-card {
+            width: 220px;
+            height: 220px;
+            background: #fff;
+            border: 4px solid #555;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* --- ADAPTABILIDAD RESPONSIVA --- */
+        @media (max-width: 768px) {
+            .navbar-container {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .about-text {
+                font-size: 0.75rem;
+                line-height: 1.9;
+                text-align: center;
+            }
+            .about-image-container {
+                justify-content: center;
+            }
+            .footer-content {
+                flex-direction: column-reverse;
+                align-items: center;
+                gap: 30px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVEGACIÓN SUPERIOR -->
+    <nav class="navbar-container">
+        <a href="#acerca" class="nav-btn">
+            <img src="image/acerca.jpg" alt="Icono Acerca" class="btn-icon-img">
+            <span>Acerca</span>
+        </a>
+        <a href="proyecto.html" class="nav-btn">
+            <img src="image/Proyecto.jpg" alt="Icono Proyectos" class="btn-icon-img">
+            <span>Proyectos</span>
+        </a>
+        
+        <!-- Logo Central (vuelve al inicio/home) -->
+        <a href="Inicio.html" class="nav-logo" id="btn-inicio">
+            <img src="image/logo.jpg" alt="Logo Central">
+        </a>
+        
+        <a href="yo.html" class="nav-btn">
+            <img src="image/yo.jpg" alt="Icono Yo" class="btn-icon-img">
+            <span>YO</span>
+        </a>
+        <a href="#contacto" class="nav-btn">
+            <img src="image/contac.jpg" alt="Icono Contacto" class="btn-icon-img">
+            <span>Contac</span>
+        </a>
+    </nav>
+
+    <!-- SECCIÓN SOBRE MI -->
+    <section class="about-section" id="yo">
+        <h2 class="section-title">SOBRE MI</h2>
+
+        <div class="about-content">
+            <!-- Texto de presentación -->
+            <div class="about-text">
+                Hola me presento soy Jeremy tengo 18 años y actualmente me dedico a estudiar, me gusta programar y conocer mas por la tecnologia, actualmente no tengo trabajo pero yo se que uno no tiene que rendirse por algo que quiere conseguir en la vida
+            </div>
+
+            <!-- Imagen decorativa (Rama con flores de cerezo) -->
+            <div class="about-image-container">
+                <img src="image/cerezos.jpg" alt="Flores de cerezo decorativas" class="about-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- PIE DE PÁGINA (FOOTER) -->
+    <footer class="footer-section">
+        <div class="footer-content">
+            
+            <div class="footer-info">
+                <div class="copyright-title">
+                    <span>©</span> DERECHOS RESERVADOS
+                </div>
+
+                <div class="info-block">
+                    ¿Tienes un proyecto en mente?<br>
+                    Hablemos
+                </div>
+
+                <div class="info-block">
+                    PROXIMAMENTE MAS ACTUALIZACIONES<br>
+                    sobre mi
+                </div>
+
+                <div class="info-block">
+                    Si quieres ir al inicio aplasta el boton del medio en la parte de arriba? Dirijete a <a href="#inicio">Boton</a>
+                </div>
+
+                <div class="info-block">
+                    Si quieres que trabaje para ti o alguna empresa? Dirijete a <a href="#acerca">ACERCA</a>
+                </div>
+            </div>
+
+            <!-- Avatar Ilustrado de la sección YO -->
+            <div class="profile-card">
+                <img src="image/avatar_3.jpg" alt="Avatar Jeremy">
+            </div>
+
+        </div>
+    </footer>
+
+</body>
+</html>
