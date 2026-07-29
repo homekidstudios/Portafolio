@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Portafolio</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    <!-- Fuente estilo pixel / retro -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        /* --- ESTILOS GENERALES Y BASE --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #000;
+            color: #ffffff;
+            font-family: 'Press Start 2P', monospace;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- MENÚ DE NAVEGACIÓN --- */
+        .navbar-container {
+            position: relative;
+            z-index: 10;
+            margin-top: 30px;
+            padding: 8px 15px;
+            background: rgba(8, 8, 8, 0.85);
+            backdrop-filter: blur(8px);
+            border: 2px solid #1a1a1a;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+        }
+
+        .nav-btn {
+            background: #000000;
+            color: #ffffff;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 25px;
+            font-size: 0.7rem;
+            font-family: 'Press Start 2P', monospace;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.9), 
+                        0px 0px 2px rgba(255, 255, 255, 0.15);
+            height: 42px;
+        }
+
+        .nav-btn:hover {
+            background: #0a0a0a;
+            transform: translateY(-1px);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 1), 
+                        0px 0px 4px rgba(255, 255, 255, 0.25);
+        }
+
+        .btn-icon-img {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+            mix-blend-mode: screen;
+            filter: brightness(1.1);
+        }
+
+        .nav-logo {
+            width: 38px;
+            height: 38px;
+            background: #1a1a1a;
+            border-radius: 50%;
+            border: 1px solid #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            text-decoration: none;
+        }
+
+        .nav-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* --- SECCIÓN CONTACTO Y REDES SOCIALES --- */
+        .contact-section {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 1000px;
+            margin-top: 40px;
+            padding: 20px 20px 60px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Área principal de interacción */
+        .contact-container {
+            position: relative;
+            width: 100%;
+            min-height: 450px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Botón / Tarjeta de Ubicación */
+        .location-box {
+            position: absolute;
+            top: 0;
+            left: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+            text-decoration: none;
+            color: #fff;
+            z-index: 5;
+            transition: transform 0.2s ease;
+        }
+
+        .location-box:hover {
+            transform: scale(1.05);
+        }
+
+        .location-title {
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-shadow: 0 0 5px rgba(255,255,255,0.5);
+        }
+
+        .location-img-wrapper {
+            width: 220px;
+            height: 140px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #444;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+            background: #111;
+        }
+
+        .location-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(120%);
+        }
+
+        /* Flor central en B/N (Spider Lily) */
+        .flower-bg {
+            max-width: 380px;
+            height: auto;
+            object-fit: contain;
+            filter: grayscale(100%) contrast(120%);
+            pointer-events: none;
+            z-index: 1;
+            margin-top: 50px;
+        }
+
+        /* Iconos flotantes de Redes Sociales */
+        .social-link {
+            position: absolute;
+            z-index: 5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 65px;
+            height: 65px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-link img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0px 0px 8px rgba(255, 255, 255, 0.3));
+        }
+
+        .social-link:hover {
+            transform: scale(1.2);
+            filter: drop-shadow(0px 0px 12px rgba(255, 255, 255, 0.8));
+        }
+
+        /* Posicionamiento exacto replicando el diseño de la imagen */
+        .social-whatsapp { top: 40px; left: 48%; transform: translateX(-50%); }
+        .social-twitter  { top: 150px; left: 22%; }
+        .social-discord  { top: 150px; right: 22%; }
+        .social-instagram{ bottom: 60px; left: 13%; }
+        .social-email    { bottom: 60px; right: 13%; }
+
+        .social-whatsapp:hover { transform: translateX(-50%) scale(1.2); }
+
+        /* --- FOOTER --- */
+        .footer-section {
+            position: relative;
+            z-index: 5;
+            width: 100%;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.8) 20%, #a0a0a0 100%);
+            margin-top: auto;
+            padding: 60px 40px 40px 40px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer-content {
+            width: 100%;
+            max-width: 1000px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            color: #000;
+        }
+
+        .footer-info {
+            max-width: 550px;
+        }
+
+        .copyright-title {
+            font-size: 0.85rem;
+            color: #fff;
+            text-shadow: 2px 2px 0px #000;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-block {
+            margin-bottom: 20px;
+            font-size: 0.6rem;
+            line-height: 1.6;
+            color: #111;
+            font-weight: bold;
+        }
+
+        .info-block a {
+            color: #000;
+            text-decoration: underline;
+        }
+
+        /* Tarjeta del Dinosaurio Pixel Art */
+        .profile-card {
+            width: 220px;
+            height: 220px;
+            background: #000;
+            border: 4px solid #333;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-card img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        /* ADAPTABILIDAD RESPONSIVA */
+        @media (max-width: 768px) {
+            .navbar-container {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .contact-container {
+                flex-direction: column;
+                min-height: auto;
+            }
+            .location-box {
+                position: relative;
+                top: 0;
+                left: 0;
+                align-items: center;
+                margin-bottom: 30px;
+            }
+            .flower-bg {
+                margin-top: 20px;
+                max-width: 280px;
+            }
+            .social-whatsapp, .social-twitter, .social-discord, .social-instagram, .social-email {
+                position: relative;
+                top: auto; left: auto; right: auto; bottom: auto;
+                transform: none !important;
+                margin: 15px;
+            }
+            .footer-content {
+                flex-direction: column-reverse;
+                align-items: center;
+                gap: 30px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- MENÚ SUPERIOR DE NAVEGACIÓN -->
+    <nav class="navbar-container">
+        <a href="#acerca" class="nav-btn">
+            <img src="icono-acerca.png" alt="Icono Acerca" class="btn-icon-img">
+            <span>Acerca</span>
+        </a>
+        <a href="#proyectos" class="nav-btn">
+            <img src="icono-proyectos.png" alt="Icono Proyectos" class="btn-icon-img">
+            <span>Proyectos</span>
+        </a>
+        
+        <a href="#inicio" class="nav-logo">
+            <img src="logo-central.png" alt="Logo Central">
+        </a>
+        
+        <a href="#yo" class="nav-btn">
+            <img src="icono-yo.png" alt="Icono Yo" class="btn-icon-img">
+            <span>YO</span>
+        </a>
+        <a href="#contacto" class="nav-btn">
+            <img src="icono-contacto.png" alt="Icono Contacto" class="btn-icon-img">
+            <span>Contac</span>
+        </a>
+    </nav>
+
+    <!-- SECCIÓN DE CONTACTO -->
+    <section class="contact-section" id="contacto">
+        <h2 class="section-title">REDES SOCIALES</h2>
+
+        <div class="contact-container">
+            
+            <!-- BOTÓN DE UBICACIÓN (Enlace interactivo a Google Maps) -->
+            <a href="https://maps.google.com" target="_blank" class="location-box" title="Ver mi ubicación en Google Maps">
+                <span class="location-title">UBICACION</span>
+                <div class="location-img-wrapper">
+                    <img src="mapa-ecuador.png" alt="Ubicación Ecuador">
+                </div>
+            </a>
+
+            <!-- FLOR CENTRAL DECORATIVA -->
+            <img src="flor-spider-lily.png" alt="Flor decorativa" class="flower-bg">
+
+            <!-- ICONOS INTERACTIVOS DE REDES SOCIALES -->
+            
+            <!-- WhatsApp -->
+            <a href="https://wa.me/593900000000" target="_blank" class="social-link social-whatsapp" title="Escríbeme por WhatsApp">
+                <img src="icono-whatsapp.png" alt="WhatsApp">
+            </a>
+
+            <!-- Twitter / X -->
+            <a href="https://twitter.com/tu_usuario" target="_blank" class="social-link social-twitter" title="Visita mi Twitter / X">
+                <img src="icono-twitter.png" alt="Twitter">
+            </a>
+
+            <!-- Discord -->
+            <a href="https://discord.com/users/tu_discord_id" target="_blank" class="social-link social-discord" title="Hablemos en Discord">
+                <img src="icono-discord.png" alt="Discord">
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://instagram.com/tu_usuario" target="_blank" class="social-link social-instagram" title="Sígueme en Instagram">
+                <img src="icono-instagram.png" alt="Instagram">
+            </a>
+
+            <!-- Email (Gmail) -->
+            <a href="mailto:tuemail@gmail.com" class="social-link social-email" title="Envíame un correo">
+                <img src="icono-gmail.png" alt="Correo Gmail">
+            </a>
+
+        </div>
+    </section>
+
+    <!-- PIE DE PÁGINA (FOOTER) -->
+    <footer class="footer-section">
+        <div class="footer-content">
+            
+            <div class="footer-info">
+                <div class="copyright-title">
+                    <span>©</span> DERECHOS RESERVADOS
+                </div>
+
+                <div class="info-block">
+                    ¿Tienes un proyecto en mente?<br>
+                    Hablemos
+                </div>
+
+                <div class="info-block">
+                    PROXIMAMENTE MAS ACTUALIZACIONES<br>
+                    sobre mi
+                </div>
+
+                <div class="info-block">
+                    Si quieres saber mas de mi? Dirijete a <a href="#yo">YO</a>
+                </div>
+
+                <div class="info-block">
+                    Si quieres ver proyectos mis proyectos?<br>
+                    Dirijete a <a href="#proyectos">PROYECTOS</a>
+                </div>
+            </div>
+
+            <!-- Avatar / Icono Dinosaurio Pixel Art de Google Chrome -->
+            <div class="profile-card">
+                <img src="dinosaurio-pixel.png" alt="Dinosaurio Pixel Art">
+            </div>
+
+        </div>
+    </footer>
+
+</body>
+</html>
